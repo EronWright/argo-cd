@@ -2,6 +2,7 @@ package services
 
 import (
 	"crypto/tls"
+	"github.com/argoproj/argo-cd/v3/applicationset/utils"
 	"net/http"
 	"testing"
 	"time"
@@ -15,7 +16,7 @@ func TestSetupBitbucketClient(t *testing.T) {
 	cfg := &bitbucketv1.Configuration{}
 
 	// Act
-	client := SetupBitbucketClient(ctx, cfg, "", false, nil)
+	client := utils.SetupBitbucketClient(ctx, cfg, "", false, nil)
 
 	// Assert
 	require.NotNil(t, client, "expected client to be created")

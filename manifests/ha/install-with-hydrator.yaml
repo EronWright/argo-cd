@@ -178,6 +178,40 @@ spec:
                         description: Chart is a Helm chart name, and must be specified
                           for applications sourced from a Helm repo.
                         type: string
+                      customization:
+                        description: Customization holds resource customization options
+                        properties:
+                          exclude:
+                            items:
+                              description: ResourceMatcher holds the filter for the
+                                resource
+                              properties:
+                                group:
+                                  type: string
+                                kind:
+                                  type: string
+                                name:
+                                  type: string
+                                namespace:
+                                  type: string
+                              type: object
+                            type: array
+                          include:
+                            items:
+                              description: ResourceMatcher holds the filter for the
+                                resource
+                              properties:
+                                group:
+                                  type: string
+                                kind:
+                                  type: string
+                                name:
+                                  type: string
+                                namespace:
+                                  type: string
+                              type: object
+                            type: array
+                        type: object
                       directory:
                         description: Directory holds path/directory specific options
                         properties:
@@ -563,6 +597,41 @@ spec:
                           description: Chart is a Helm chart name, and must be specified
                             for applications sourced from a Helm repo.
                           type: string
+                        customization:
+                          description: Customization holds resource customization
+                            options
+                          properties:
+                            exclude:
+                              items:
+                                description: ResourceMatcher holds the filter for
+                                  the resource
+                                properties:
+                                  group:
+                                    type: string
+                                  kind:
+                                    type: string
+                                  name:
+                                    type: string
+                                  namespace:
+                                    type: string
+                                type: object
+                              type: array
+                            include:
+                              items:
+                                description: ResourceMatcher holds the filter for
+                                  the resource
+                                properties:
+                                  group:
+                                    type: string
+                                  kind:
+                                    type: string
+                                  name:
+                                    type: string
+                                  namespace:
+                                    type: string
+                                type: object
+                              type: array
+                          type: object
                         directory:
                           description: Directory holds path/directory specific options
                           properties:
@@ -1070,6 +1139,38 @@ spec:
                     description: Chart is a Helm chart name, and must be specified
                       for applications sourced from a Helm repo.
                     type: string
+                  customization:
+                    description: Customization holds resource customization options
+                    properties:
+                      exclude:
+                        items:
+                          description: ResourceMatcher holds the filter for the resource
+                          properties:
+                            group:
+                              type: string
+                            kind:
+                              type: string
+                            name:
+                              type: string
+                            namespace:
+                              type: string
+                          type: object
+                        type: array
+                      include:
+                        items:
+                          description: ResourceMatcher holds the filter for the resource
+                          properties:
+                            group:
+                              type: string
+                            kind:
+                              type: string
+                            name:
+                              type: string
+                            namespace:
+                              type: string
+                          type: object
+                        type: array
+                    type: object
                   directory:
                     description: Directory holds path/directory specific options
                     properties:
@@ -1855,6 +1956,40 @@ spec:
                       description: Chart is a Helm chart name, and must be specified
                         for applications sourced from a Helm repo.
                       type: string
+                    customization:
+                      description: Customization holds resource customization options
+                      properties:
+                        exclude:
+                          items:
+                            description: ResourceMatcher holds the filter for the
+                              resource
+                            properties:
+                              group:
+                                type: string
+                              kind:
+                                type: string
+                              name:
+                                type: string
+                              namespace:
+                                type: string
+                            type: object
+                          type: array
+                        include:
+                          items:
+                            description: ResourceMatcher holds the filter for the
+                              resource
+                            properties:
+                              group:
+                                type: string
+                              kind:
+                                type: string
+                              name:
+                                type: string
+                              namespace:
+                                type: string
+                            type: object
+                          type: array
+                      type: object
                     directory:
                       description: Directory holds path/directory specific options
                       properties:
@@ -2409,6 +2544,41 @@ spec:
                           description: Chart is a Helm chart name, and must be specified
                             for applications sourced from a Helm repo.
                           type: string
+                        customization:
+                          description: Customization holds resource customization
+                            options
+                          properties:
+                            exclude:
+                              items:
+                                description: ResourceMatcher holds the filter for
+                                  the resource
+                                properties:
+                                  group:
+                                    type: string
+                                  kind:
+                                    type: string
+                                  name:
+                                    type: string
+                                  namespace:
+                                    type: string
+                                type: object
+                              type: array
+                            include:
+                              items:
+                                description: ResourceMatcher holds the filter for
+                                  the resource
+                                properties:
+                                  group:
+                                    type: string
+                                  kind:
+                                    type: string
+                                  name:
+                                    type: string
+                                  namespace:
+                                    type: string
+                                type: object
+                              type: array
+                          type: object
                         directory:
                           description: Directory holds path/directory specific options
                           properties:
@@ -2797,6 +2967,41 @@ spec:
                             description: Chart is a Helm chart name, and must be specified
                               for applications sourced from a Helm repo.
                             type: string
+                          customization:
+                            description: Customization holds resource customization
+                              options
+                            properties:
+                              exclude:
+                                items:
+                                  description: ResourceMatcher holds the filter for
+                                    the resource
+                                  properties:
+                                    group:
+                                      type: string
+                                    kind:
+                                      type: string
+                                    name:
+                                      type: string
+                                    namespace:
+                                      type: string
+                                  type: object
+                                type: array
+                              include:
+                                items:
+                                  description: ResourceMatcher holds the filter for
+                                    the resource
+                                  properties:
+                                    group:
+                                      type: string
+                                    kind:
+                                      type: string
+                                    name:
+                                      type: string
+                                    namespace:
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
                           directory:
                             description: Directory holds path/directory specific options
                             properties:
@@ -3336,6 +3541,41 @@ spec:
                                   be specified for applications sourced from a Helm
                                   repo.
                                 type: string
+                              customization:
+                                description: Customization holds resource customization
+                                  options
+                                properties:
+                                  exclude:
+                                    items:
+                                      description: ResourceMatcher holds the filter
+                                        for the resource
+                                      properties:
+                                        group:
+                                          type: string
+                                        kind:
+                                          type: string
+                                        name:
+                                          type: string
+                                        namespace:
+                                          type: string
+                                      type: object
+                                    type: array
+                                  include:
+                                    items:
+                                      description: ResourceMatcher holds the filter
+                                        for the resource
+                                      properties:
+                                        group:
+                                          type: string
+                                        kind:
+                                          type: string
+                                        name:
+                                          type: string
+                                        namespace:
+                                          type: string
+                                      type: object
+                                    type: array
+                                type: object
                               directory:
                                 description: Directory holds path/directory specific
                                   options
@@ -3746,6 +3986,41 @@ spec:
                                     be specified for applications sourced from a Helm
                                     repo.
                                   type: string
+                                customization:
+                                  description: Customization holds resource customization
+                                    options
+                                  properties:
+                                    exclude:
+                                      items:
+                                        description: ResourceMatcher holds the filter
+                                          for the resource
+                                        properties:
+                                          group:
+                                            type: string
+                                          kind:
+                                            type: string
+                                          name:
+                                            type: string
+                                          namespace:
+                                            type: string
+                                        type: object
+                                      type: array
+                                    include:
+                                      items:
+                                        description: ResourceMatcher holds the filter
+                                          for the resource
+                                        properties:
+                                          group:
+                                            type: string
+                                          kind:
+                                            type: string
+                                          name:
+                                            type: string
+                                          namespace:
+                                            type: string
+                                        type: object
+                                      type: array
+                                  type: object
                                 directory:
                                   description: Directory holds path/directory specific
                                     options
@@ -4289,6 +4564,41 @@ spec:
                             description: Chart is a Helm chart name, and must be specified
                               for applications sourced from a Helm repo.
                             type: string
+                          customization:
+                            description: Customization holds resource customization
+                              options
+                            properties:
+                              exclude:
+                                items:
+                                  description: ResourceMatcher holds the filter for
+                                    the resource
+                                  properties:
+                                    group:
+                                      type: string
+                                    kind:
+                                      type: string
+                                    name:
+                                      type: string
+                                    namespace:
+                                      type: string
+                                  type: object
+                                type: array
+                              include:
+                                items:
+                                  description: ResourceMatcher holds the filter for
+                                    the resource
+                                  properties:
+                                    group:
+                                      type: string
+                                    kind:
+                                      type: string
+                                    name:
+                                      type: string
+                                    namespace:
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
                           directory:
                             description: Directory holds path/directory specific options
                             properties:
@@ -4685,6 +4995,41 @@ spec:
                               description: Chart is a Helm chart name, and must be
                                 specified for applications sourced from a Helm repo.
                               type: string
+                            customization:
+                              description: Customization holds resource customization
+                                options
+                              properties:
+                                exclude:
+                                  items:
+                                    description: ResourceMatcher holds the filter
+                                      for the resource
+                                    properties:
+                                      group:
+                                        type: string
+                                      kind:
+                                        type: string
+                                      name:
+                                        type: string
+                                      namespace:
+                                        type: string
+                                    type: object
+                                  type: array
+                                include:
+                                  items:
+                                    description: ResourceMatcher holds the filter
+                                      for the resource
+                                    properties:
+                                      group:
+                                        type: string
+                                      kind:
+                                        type: string
+                                      name:
+                                        type: string
+                                      namespace:
+                                        type: string
+                                    type: object
+                                  type: array
+                              type: object
                             directory:
                               description: Directory holds path/directory specific
                                 options
@@ -6184,6 +6529,41 @@ spec:
                             description: Chart is a Helm chart name, and must be specified
                               for applications sourced from a Helm repo.
                             type: string
+                          customization:
+                            description: Customization holds resource customization
+                              options
+                            properties:
+                              exclude:
+                                items:
+                                  description: ResourceMatcher holds the filter for
+                                    the resource
+                                  properties:
+                                    group:
+                                      type: string
+                                    kind:
+                                      type: string
+                                    name:
+                                      type: string
+                                    namespace:
+                                      type: string
+                                  type: object
+                                type: array
+                              include:
+                                items:
+                                  description: ResourceMatcher holds the filter for
+                                    the resource
+                                  properties:
+                                    group:
+                                      type: string
+                                    kind:
+                                      type: string
+                                    name:
+                                      type: string
+                                    namespace:
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
                           directory:
                             description: Directory holds path/directory specific options
                             properties:
@@ -6580,6 +6960,41 @@ spec:
                               description: Chart is a Helm chart name, and must be
                                 specified for applications sourced from a Helm repo.
                               type: string
+                            customization:
+                              description: Customization holds resource customization
+                                options
+                              properties:
+                                exclude:
+                                  items:
+                                    description: ResourceMatcher holds the filter
+                                      for the resource
+                                    properties:
+                                      group:
+                                        type: string
+                                      kind:
+                                        type: string
+                                      name:
+                                        type: string
+                                      namespace:
+                                        type: string
+                                    type: object
+                                  type: array
+                                include:
+                                  items:
+                                    description: ResourceMatcher holds the filter
+                                      for the resource
+                                    properties:
+                                      group:
+                                        type: string
+                                      kind:
+                                        type: string
+                                      name:
+                                        type: string
+                                      namespace:
+                                        type: string
+                                    type: object
+                                  type: array
+                              type: object
                             directory:
                               description: Directory holds path/directory specific
                                 options
@@ -7036,6 +7451,13 @@ spec:
             properties:
               applyNestedSelectors:
                 type: boolean
+              filter:
+                properties:
+                  expressions:
+                    items:
+                      type: string
+                    type: array
+                type: object
               generators:
                 items:
                   properties:
@@ -7154,6 +7576,35 @@ spec:
                                   properties:
                                     chart:
                                       type: string
+                                    customization:
+                                      properties:
+                                        exclude:
+                                          items:
+                                            properties:
+                                              group:
+                                                type: string
+                                              kind:
+                                                type: string
+                                              name:
+                                                type: string
+                                              namespace:
+                                                type: string
+                                            type: object
+                                          type: array
+                                        include:
+                                          items:
+                                            properties:
+                                              group:
+                                                type: string
+                                              kind:
+                                                type: string
+                                              name:
+                                                type: string
+                                              namespace:
+                                                type: string
+                                            type: object
+                                          type: array
+                                      type: object
                                     directory:
                                       properties:
                                         exclude:
@@ -7654,6 +8105,35 @@ spec:
                                     properties:
                                       chart:
                                         type: string
+                                      customization:
+                                        properties:
+                                          exclude:
+                                            items:
+                                              properties:
+                                                group:
+                                                  type: string
+                                                kind:
+                                                  type: string
+                                                name:
+                                                  type: string
+                                                namespace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          include:
+                                            items:
+                                              properties:
+                                                group:
+                                                  type: string
+                                                kind:
+                                                  type: string
+                                                name:
+                                                  type: string
+                                                namespace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
                                       directory:
                                         properties:
                                           exclude:
@@ -8062,6 +8542,35 @@ spec:
                                   properties:
                                     chart:
                                       type: string
+                                    customization:
+                                      properties:
+                                        exclude:
+                                          items:
+                                            properties:
+                                              group:
+                                                type: string
+                                              kind:
+                                                type: string
+                                              name:
+                                                type: string
+                                              namespace:
+                                                type: string
+                                            type: object
+                                          type: array
+                                        include:
+                                          items:
+                                            properties:
+                                              group:
+                                                type: string
+                                              kind:
+                                                type: string
+                                              name:
+                                                type: string
+                                              namespace:
+                                                type: string
+                                            type: object
+                                          type: array
+                                      type: object
                                     directory:
                                       properties:
                                         exclude:
@@ -8562,6 +9071,35 @@ spec:
                                     properties:
                                       chart:
                                         type: string
+                                      customization:
+                                        properties:
+                                          exclude:
+                                            items:
+                                              properties:
+                                                group:
+                                                  type: string
+                                                kind:
+                                                  type: string
+                                                name:
+                                                  type: string
+                                                namespace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          include:
+                                            items:
+                                              properties:
+                                                group:
+                                                  type: string
+                                                kind:
+                                                  type: string
+                                                name:
+                                                  type: string
+                                                namespace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
                                       directory:
                                         properties:
                                           exclude:
@@ -8971,6 +9509,35 @@ spec:
                                   properties:
                                     chart:
                                       type: string
+                                    customization:
+                                      properties:
+                                        exclude:
+                                          items:
+                                            properties:
+                                              group:
+                                                type: string
+                                              kind:
+                                                type: string
+                                              name:
+                                                type: string
+                                              namespace:
+                                                type: string
+                                            type: object
+                                          type: array
+                                        include:
+                                          items:
+                                            properties:
+                                              group:
+                                                type: string
+                                              kind:
+                                                type: string
+                                              name:
+                                                type: string
+                                              namespace:
+                                                type: string
+                                            type: object
+                                          type: array
+                                      type: object
                                     directory:
                                       properties:
                                         exclude:
@@ -9471,6 +10038,35 @@ spec:
                                     properties:
                                       chart:
                                         type: string
+                                      customization:
+                                        properties:
+                                          exclude:
+                                            items:
+                                              properties:
+                                                group:
+                                                  type: string
+                                                kind:
+                                                  type: string
+                                                name:
+                                                  type: string
+                                                namespace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          include:
+                                            items:
+                                              properties:
+                                                group:
+                                                  type: string
+                                                kind:
+                                                  type: string
+                                                name:
+                                                  type: string
+                                                namespace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
                                       directory:
                                         properties:
                                           exclude:
@@ -9858,6 +10454,35 @@ spec:
                                   properties:
                                     chart:
                                       type: string
+                                    customization:
+                                      properties:
+                                        exclude:
+                                          items:
+                                            properties:
+                                              group:
+                                                type: string
+                                              kind:
+                                                type: string
+                                              name:
+                                                type: string
+                                              namespace:
+                                                type: string
+                                            type: object
+                                          type: array
+                                        include:
+                                          items:
+                                            properties:
+                                              group:
+                                                type: string
+                                              kind:
+                                                type: string
+                                              name:
+                                                type: string
+                                              namespace:
+                                                type: string
+                                            type: object
+                                          type: array
+                                      type: object
                                     directory:
                                       properties:
                                         exclude:
@@ -10358,6 +10983,35 @@ spec:
                                     properties:
                                       chart:
                                         type: string
+                                      customization:
+                                        properties:
+                                          exclude:
+                                            items:
+                                              properties:
+                                                group:
+                                                  type: string
+                                                kind:
+                                                  type: string
+                                                name:
+                                                  type: string
+                                                namespace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          include:
+                                            items:
+                                              properties:
+                                                group:
+                                                  type: string
+                                                kind:
+                                                  type: string
+                                                name:
+                                                  type: string
+                                                namespace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
                                       directory:
                                         properties:
                                           exclude:
@@ -10770,6 +11424,35 @@ spec:
                                             properties:
                                               chart:
                                                 type: string
+                                              customization:
+                                                properties:
+                                                  exclude:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                  include:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                type: object
                                               directory:
                                                 properties:
                                                   exclude:
@@ -11270,6 +11953,35 @@ spec:
                                               properties:
                                                 chart:
                                                   type: string
+                                                customization:
+                                                  properties:
+                                                    exclude:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                    include:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                  type: object
                                                 directory:
                                                   properties:
                                                     exclude:
@@ -11678,6 +12390,35 @@ spec:
                                             properties:
                                               chart:
                                                 type: string
+                                              customization:
+                                                properties:
+                                                  exclude:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                  include:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                type: object
                                               directory:
                                                 properties:
                                                   exclude:
@@ -12178,6 +12919,35 @@ spec:
                                               properties:
                                                 chart:
                                                   type: string
+                                                customization:
+                                                  properties:
+                                                    exclude:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                    include:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                  type: object
                                                 directory:
                                                   properties:
                                                     exclude:
@@ -12587,6 +13357,35 @@ spec:
                                             properties:
                                               chart:
                                                 type: string
+                                              customization:
+                                                properties:
+                                                  exclude:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                  include:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                type: object
                                               directory:
                                                 properties:
                                                   exclude:
@@ -13087,6 +13886,35 @@ spec:
                                               properties:
                                                 chart:
                                                   type: string
+                                                customization:
+                                                  properties:
+                                                    exclude:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                    include:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                  type: object
                                                 directory:
                                                   properties:
                                                     exclude:
@@ -13474,6 +14302,35 @@ spec:
                                             properties:
                                               chart:
                                                 type: string
+                                              customization:
+                                                properties:
+                                                  exclude:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                  include:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                type: object
                                               directory:
                                                 properties:
                                                   exclude:
@@ -13974,6 +14831,35 @@ spec:
                                               properties:
                                                 chart:
                                                   type: string
+                                                customization:
+                                                  properties:
+                                                    exclude:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                    include:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                  type: object
                                                 directory:
                                                   properties:
                                                     exclude:
@@ -14369,6 +15255,35 @@ spec:
                                             properties:
                                               chart:
                                                 type: string
+                                              customization:
+                                                properties:
+                                                  exclude:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                  include:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                type: object
                                               directory:
                                                 properties:
                                                   exclude:
@@ -14869,6 +15784,35 @@ spec:
                                               properties:
                                                 chart:
                                                   type: string
+                                                customization:
+                                                  properties:
+                                                    exclude:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                    include:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                  type: object
                                                 directory:
                                                   properties:
                                                     exclude:
@@ -15491,6 +16435,35 @@ spec:
                                             properties:
                                               chart:
                                                 type: string
+                                              customization:
+                                                properties:
+                                                  exclude:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                  include:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                type: object
                                               directory:
                                                 properties:
                                                   exclude:
@@ -15991,6 +16964,35 @@ spec:
                                               properties:
                                                 chart:
                                                   type: string
+                                                customization:
+                                                  properties:
+                                                    exclude:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                    include:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                  type: object
                                                 directory:
                                                   properties:
                                                     exclude:
@@ -16604,6 +17606,35 @@ spec:
                                             properties:
                                               chart:
                                                 type: string
+                                              customization:
+                                                properties:
+                                                  exclude:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                  include:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                type: object
                                               directory:
                                                 properties:
                                                   exclude:
@@ -17104,6 +18135,35 @@ spec:
                                               properties:
                                                 chart:
                                                   type: string
+                                                customization:
+                                                  properties:
+                                                    exclude:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                    include:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                  type: object
                                                 directory:
                                                   properties:
                                                     exclude:
@@ -17508,6 +18568,35 @@ spec:
                                   properties:
                                     chart:
                                       type: string
+                                    customization:
+                                      properties:
+                                        exclude:
+                                          items:
+                                            properties:
+                                              group:
+                                                type: string
+                                              kind:
+                                                type: string
+                                              name:
+                                                type: string
+                                              namespace:
+                                                type: string
+                                            type: object
+                                          type: array
+                                        include:
+                                          items:
+                                            properties:
+                                              group:
+                                                type: string
+                                              kind:
+                                                type: string
+                                              name:
+                                                type: string
+                                              namespace:
+                                                type: string
+                                            type: object
+                                          type: array
+                                      type: object
                                     directory:
                                       properties:
                                         exclude:
@@ -18008,6 +19097,35 @@ spec:
                                     properties:
                                       chart:
                                         type: string
+                                      customization:
+                                        properties:
+                                          exclude:
+                                            items:
+                                              properties:
+                                                group:
+                                                  type: string
+                                                kind:
+                                                  type: string
+                                                name:
+                                                  type: string
+                                                namespace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          include:
+                                            items:
+                                              properties:
+                                                group:
+                                                  type: string
+                                                kind:
+                                                  type: string
+                                                name:
+                                                  type: string
+                                                namespace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
                                       directory:
                                         properties:
                                           exclude:
@@ -18422,6 +19540,35 @@ spec:
                                             properties:
                                               chart:
                                                 type: string
+                                              customization:
+                                                properties:
+                                                  exclude:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                  include:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                type: object
                                               directory:
                                                 properties:
                                                   exclude:
@@ -18922,6 +20069,35 @@ spec:
                                               properties:
                                                 chart:
                                                   type: string
+                                                customization:
+                                                  properties:
+                                                    exclude:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                    include:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                  type: object
                                                 directory:
                                                   properties:
                                                     exclude:
@@ -19330,6 +20506,35 @@ spec:
                                             properties:
                                               chart:
                                                 type: string
+                                              customization:
+                                                properties:
+                                                  exclude:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                  include:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                type: object
                                               directory:
                                                 properties:
                                                   exclude:
@@ -19830,6 +21035,35 @@ spec:
                                               properties:
                                                 chart:
                                                   type: string
+                                                customization:
+                                                  properties:
+                                                    exclude:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                    include:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                  type: object
                                                 directory:
                                                   properties:
                                                     exclude:
@@ -20239,6 +21473,35 @@ spec:
                                             properties:
                                               chart:
                                                 type: string
+                                              customization:
+                                                properties:
+                                                  exclude:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                  include:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                type: object
                                               directory:
                                                 properties:
                                                   exclude:
@@ -20739,6 +22002,35 @@ spec:
                                               properties:
                                                 chart:
                                                   type: string
+                                                customization:
+                                                  properties:
+                                                    exclude:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                    include:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                  type: object
                                                 directory:
                                                   properties:
                                                     exclude:
@@ -21126,6 +22418,35 @@ spec:
                                             properties:
                                               chart:
                                                 type: string
+                                              customization:
+                                                properties:
+                                                  exclude:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                  include:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                type: object
                                               directory:
                                                 properties:
                                                   exclude:
@@ -21626,6 +22947,35 @@ spec:
                                               properties:
                                                 chart:
                                                   type: string
+                                                customization:
+                                                  properties:
+                                                    exclude:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                    include:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                  type: object
                                                 directory:
                                                   properties:
                                                     exclude:
@@ -22021,6 +23371,35 @@ spec:
                                             properties:
                                               chart:
                                                 type: string
+                                              customization:
+                                                properties:
+                                                  exclude:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                  include:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                type: object
                                               directory:
                                                 properties:
                                                   exclude:
@@ -22521,6 +23900,35 @@ spec:
                                               properties:
                                                 chart:
                                                   type: string
+                                                customization:
+                                                  properties:
+                                                    exclude:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                    include:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                  type: object
                                                 directory:
                                                   properties:
                                                     exclude:
@@ -23143,6 +24551,35 @@ spec:
                                             properties:
                                               chart:
                                                 type: string
+                                              customization:
+                                                properties:
+                                                  exclude:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                  include:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                type: object
                                               directory:
                                                 properties:
                                                   exclude:
@@ -23643,6 +25080,35 @@ spec:
                                               properties:
                                                 chart:
                                                   type: string
+                                                customization:
+                                                  properties:
+                                                    exclude:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                    include:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                  type: object
                                                 directory:
                                                   properties:
                                                     exclude:
@@ -24256,6 +25722,35 @@ spec:
                                             properties:
                                               chart:
                                                 type: string
+                                              customization:
+                                                properties:
+                                                  exclude:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                  include:
+                                                    items:
+                                                      properties:
+                                                        group:
+                                                          type: string
+                                                        kind:
+                                                          type: string
+                                                        name:
+                                                          type: string
+                                                        namespace:
+                                                          type: string
+                                                      type: object
+                                                    type: array
+                                                type: object
                                               directory:
                                                 properties:
                                                   exclude:
@@ -24756,6 +26251,35 @@ spec:
                                               properties:
                                                 chart:
                                                   type: string
+                                                customization:
+                                                  properties:
+                                                    exclude:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                    include:
+                                                      items:
+                                                        properties:
+                                                          group:
+                                                            type: string
+                                                          kind:
+                                                            type: string
+                                                          name:
+                                                            type: string
+                                                          namespace:
+                                                            type: string
+                                                        type: object
+                                                      type: array
+                                                  type: object
                                                 directory:
                                                   properties:
                                                     exclude:
@@ -25164,6 +26688,35 @@ spec:
                                   properties:
                                     chart:
                                       type: string
+                                    customization:
+                                      properties:
+                                        exclude:
+                                          items:
+                                            properties:
+                                              group:
+                                                type: string
+                                              kind:
+                                                type: string
+                                              name:
+                                                type: string
+                                              namespace:
+                                                type: string
+                                            type: object
+                                          type: array
+                                        include:
+                                          items:
+                                            properties:
+                                              group:
+                                                type: string
+                                              kind:
+                                                type: string
+                                              name:
+                                                type: string
+                                              namespace:
+                                                type: string
+                                            type: object
+                                          type: array
+                                      type: object
                                     directory:
                                       properties:
                                         exclude:
@@ -25664,6 +27217,35 @@ spec:
                                     properties:
                                       chart:
                                         type: string
+                                      customization:
+                                        properties:
+                                          exclude:
+                                            items:
+                                              properties:
+                                                group:
+                                                  type: string
+                                                kind:
+                                                  type: string
+                                                name:
+                                                  type: string
+                                                namespace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          include:
+                                            items:
+                                              properties:
+                                                group:
+                                                  type: string
+                                                kind:
+                                                  type: string
+                                                name:
+                                                  type: string
+                                                namespace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
                                       directory:
                                         properties:
                                           exclude:
@@ -26058,6 +27640,35 @@ spec:
                                   properties:
                                     chart:
                                       type: string
+                                    customization:
+                                      properties:
+                                        exclude:
+                                          items:
+                                            properties:
+                                              group:
+                                                type: string
+                                              kind:
+                                                type: string
+                                              name:
+                                                type: string
+                                              namespace:
+                                                type: string
+                                            type: object
+                                          type: array
+                                        include:
+                                          items:
+                                            properties:
+                                              group:
+                                                type: string
+                                              kind:
+                                                type: string
+                                              name:
+                                                type: string
+                                              namespace:
+                                                type: string
+                                            type: object
+                                          type: array
+                                      type: object
                                     directory:
                                       properties:
                                         exclude:
@@ -26558,6 +28169,35 @@ spec:
                                     properties:
                                       chart:
                                         type: string
+                                      customization:
+                                        properties:
+                                          exclude:
+                                            items:
+                                              properties:
+                                                group:
+                                                  type: string
+                                                kind:
+                                                  type: string
+                                                name:
+                                                  type: string
+                                                namespace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          include:
+                                            items:
+                                              properties:
+                                                group:
+                                                  type: string
+                                                kind:
+                                                  type: string
+                                                name:
+                                                  type: string
+                                                namespace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
                                       directory:
                                         properties:
                                           exclude:
@@ -27180,6 +28820,35 @@ spec:
                                   properties:
                                     chart:
                                       type: string
+                                    customization:
+                                      properties:
+                                        exclude:
+                                          items:
+                                            properties:
+                                              group:
+                                                type: string
+                                              kind:
+                                                type: string
+                                              name:
+                                                type: string
+                                              namespace:
+                                                type: string
+                                            type: object
+                                          type: array
+                                        include:
+                                          items:
+                                            properties:
+                                              group:
+                                                type: string
+                                              kind:
+                                                type: string
+                                              name:
+                                                type: string
+                                              namespace:
+                                                type: string
+                                            type: object
+                                          type: array
+                                      type: object
                                     directory:
                                       properties:
                                         exclude:
@@ -27680,6 +29349,35 @@ spec:
                                     properties:
                                       chart:
                                         type: string
+                                      customization:
+                                        properties:
+                                          exclude:
+                                            items:
+                                              properties:
+                                                group:
+                                                  type: string
+                                                kind:
+                                                  type: string
+                                                name:
+                                                  type: string
+                                                namespace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          include:
+                                            items:
+                                              properties:
+                                                group:
+                                                  type: string
+                                                kind:
+                                                  type: string
+                                                name:
+                                                  type: string
+                                                namespace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
                                       directory:
                                         properties:
                                           exclude:
@@ -28293,6 +29991,35 @@ spec:
                                   properties:
                                     chart:
                                       type: string
+                                    customization:
+                                      properties:
+                                        exclude:
+                                          items:
+                                            properties:
+                                              group:
+                                                type: string
+                                              kind:
+                                                type: string
+                                              name:
+                                                type: string
+                                              namespace:
+                                                type: string
+                                            type: object
+                                          type: array
+                                        include:
+                                          items:
+                                            properties:
+                                              group:
+                                                type: string
+                                              kind:
+                                                type: string
+                                              name:
+                                                type: string
+                                              namespace:
+                                                type: string
+                                            type: object
+                                          type: array
+                                      type: object
                                     directory:
                                       properties:
                                         exclude:
@@ -28793,6 +30520,35 @@ spec:
                                     properties:
                                       chart:
                                         type: string
+                                      customization:
+                                        properties:
+                                          exclude:
+                                            items:
+                                              properties:
+                                                group:
+                                                  type: string
+                                                kind:
+                                                  type: string
+                                                name:
+                                                  type: string
+                                                namespace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          include:
+                                            items:
+                                              properties:
+                                                group:
+                                                  type: string
+                                                kind:
+                                                  type: string
+                                                name:
+                                                  type: string
+                                                namespace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
                                       directory:
                                         properties:
                                           exclude:
@@ -29274,6 +31030,35 @@ spec:
                         properties:
                           chart:
                             type: string
+                          customization:
+                            properties:
+                              exclude:
+                                items:
+                                  properties:
+                                    group:
+                                      type: string
+                                    kind:
+                                      type: string
+                                    name:
+                                      type: string
+                                    namespace:
+                                      type: string
+                                  type: object
+                                type: array
+                              include:
+                                items:
+                                  properties:
+                                    group:
+                                      type: string
+                                    kind:
+                                      type: string
+                                    name:
+                                      type: string
+                                    namespace:
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
                           directory:
                             properties:
                               exclude:
@@ -29774,6 +31559,35 @@ spec:
                           properties:
                             chart:
                               type: string
+                            customization:
+                              properties:
+                                exclude:
+                                  items:
+                                    properties:
+                                      group:
+                                        type: string
+                                      kind:
+                                        type: string
+                                      name:
+                                        type: string
+                                      namespace:
+                                        type: string
+                                    type: object
+                                  type: array
+                                include:
+                                  items:
+                                    properties:
+                                      group:
+                                        type: string
+                                      kind:
+                                        type: string
+                                      name:
+                                        type: string
+                                      namespace:
+                                        type: string
+                                    type: object
+                                  type: array
+                              type: object
                             directory:
                               properties:
                                 exclude:
