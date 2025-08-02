@@ -28,7 +28,9 @@ var (
 
 	collectClusterInfoInterval = 5 * time.Minute
 
-	httpClientTimeout = 30 * time.Second
+	httpClientTimeout     = 30 * time.Second
+	maxPendingRequests    = 1000
+	maxConcurrentRequests = 100
 
 	clusterInfoURL = "http://localhost:8002/k8s-info"
 	resourceURL    = "http://localhost:8002/k8s-resources"
@@ -59,6 +61,8 @@ type akProcessor struct {
 	appsNs           string
 	initAppsNs       sync.Mutex
 	client           *http.Client
+	outReqs          chan *http.Request
+	initOutReqs      sync.Once
 }
 
 func (p *akProcessor) getAppsNsLister() v1alpha1.ApplicationNamespaceLister {
@@ -70,6 +74,37 @@ func (p *akProcessor) getAppsNsLister() v1alpha1.ApplicationNamespaceLister {
 		p.initAppsNs.Unlock()
 	}
 	return p.appListener.Applications(p.appsNs)
+}
+
+func (p *akProcessor) processOutReqs() {
+	for r := range p.outReqs {
+		resp, err := p.client.Do(r)
+		if err != nil {
+			log.Errorf("failed to send request: %v", err)
+			continue
+		}
+		if resp.StatusCode != http.StatusOK {
+			log.Errorf("received non-OK response: %s", resp.Status)
+		}
+		_ = resp.Body.Close()
+	}
+}
+
+func (p *akProcessor) sendReq(req *http.Request) {
+	p.initOutReqs.Do(func() {
+		p.outReqs = make(chan *http.Request, maxPendingRequests)
+		for i := 0; i < maxConcurrentRequests; i++ {
+			go func() {
+				p.processOutReqs()
+			}()
+		}
+	})
+	select {
+	case p.outReqs <- req:
+	default:
+		log.Warn("outgoing request channel is full, dropping request")
+		return
+	}
 }
 
 func (p *akProcessor) sendEvents(events *gkEvents, override health.HealthOverride) {
@@ -84,12 +119,7 @@ func (p *akProcessor) sendEvents(events *gkEvents, override health.HealthOverrid
 		log.Errorf("failed to create request: %v", err)
 		return
 	}
-	resp, err := p.client.Do(req)
-	if err != nil {
-		log.Errorf("failed to send resource events: %v", err)
-		return
-	}
-	defer resp.Body.Close()
+	p.sendReq(req)
 }
 
 func (p *akProcessor) sendClusterInfo(info clustercache.ClusterInfo) {
@@ -109,12 +139,7 @@ func (p *akProcessor) sendClusterInfo(info clustercache.ClusterInfo) {
 		log.Errorf("failed to create request: %v", err)
 		return
 	}
-	resp, err := p.client.Do(req)
-	if err != nil {
-		log.Errorf("failed to send cluster info: %v", err)
-		return
-	}
-	defer resp.Body.Close()
+	p.sendReq(req)
 }
 
 func (p *akProcessor) StartInfoCollector(cache clustercache.ClusterCache) {
