@@ -1065,6 +1065,8 @@ func newArgoCDServiceSet(a *ArgoCDServer) *ArgoCDServiceSet {
 		nil,
 		a.Namespace,
 		projectLock,
+		a.settingsMgr,
+		a.projInformer,
 		a.ApplicationNamespaces,
 		a.GitSubmoduleEnabled,
 		a.EnableNewGitFileGlobbing,

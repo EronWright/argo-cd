@@ -227,15 +227,6 @@ func NewCommand() *cobra.Command {
 
 			topLevelGenerators := generators.GetGenerators(ctx, mgr.GetClient(), k8sClient, namespace, argoCDService, dynamicClient, scmConfig, clusterInformer)
 
-			// start a webhook server that listens to incoming webhook payloads
-			webhookHandler, err := webhook.NewWebhookHandler(webhookParallelism, argoSettingsMgr, mgr.GetClient(), topLevelGenerators)
-			if err != nil {
-				log.Error(err, "failed to create webhook handler")
-			}
-			if webhookHandler != nil {
-				startWebhookServer(webhookHandler, webhookAddr)
-			}
-
 			metrics := appsetmetrics.NewApplicationsetMetrics(
 				utils.NewAppsetLister(mgr.GetClient()),
 				metricsAplicationsetLabels,
@@ -253,6 +244,15 @@ func NewCommand() *cobra.Command {
 				os.Exit(1)
 			}
 			appsMatcher := utils.NewAppsMatcher(argoCDService, k8sClient, argoCDDB, namespace, argoSettingsMgr, projInformer)
+
+			// start a webhook server that listens to incoming webhook payloads
+			webhookHandler, err := webhook.NewWebhookHandler(webhookParallelism, argoSettingsMgr, mgr.GetClient(), topLevelGenerators, appsMatcher)
+			if err != nil {
+				log.Error(err, "failed to create webhook handler")
+			}
+			if webhookHandler != nil {
+				startWebhookServer(webhookHandler, webhookAddr)
+			}
 
 			if err = (&controllers.ApplicationSetReconciler{
 				Generators:                   topLevelGenerators,

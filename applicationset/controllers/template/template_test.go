@@ -1,6 +1,7 @@
 package template
 
 import (
+	"context"
 	"errors"
 	"maps"
 	"testing"
@@ -119,7 +120,15 @@ func TestGenerateApplications(t *testing.T) {
 			}
 			renderer := rendererMock
 
-			got, reason, err := GenerateApplications(log.NewEntry(log.StandardLogger()), v1alpha1.ApplicationSet{
+			matcherMock := rendmock.Matcher{}
+			tempAppList := []v1alpha1.Application{}
+			matcherMock.On("FilterApps", mock.Anything, mock.Anything, mock.Anything, mock.Anything).
+				Run(func(args mock.Arguments) {
+					apps := args.Get(3).([]v1alpha1.Application)
+					tempAppList = apps
+				}).Return(tempAppList, nil)
+
+			got, reason, err := GenerateApplications(context.TODO(), log.NewEntry(log.StandardLogger()), v1alpha1.ApplicationSet{
 				ObjectMeta: metav1.ObjectMeta{
 					Name:      "name",
 					Namespace: "namespace",
@@ -132,6 +141,7 @@ func TestGenerateApplications(t *testing.T) {
 				generators,
 				renderer,
 				nil,
+				&matcherMock,
 			)
 
 			if cc.expectErr {
@@ -221,7 +231,15 @@ func TestMergeTemplateApplications(t *testing.T) {
 			}
 			renderer := rendererMock
 
-			got, _, _ := GenerateApplications(log.NewEntry(log.StandardLogger()), v1alpha1.ApplicationSet{
+			matcherMock := rendmock.Matcher{}
+			tempAppList := []v1alpha1.Application{}
+			matcherMock.On("FilterApps", mock.Anything, mock.Anything, mock.Anything, mock.Anything).
+				Run(func(args mock.Arguments) {
+					apps := args.Get(3).([]v1alpha1.Application)
+					tempAppList = apps
+				}).Return(tempAppList, nil)
+
+			got, _, _ := GenerateApplications(context.TODO(), log.NewEntry(log.StandardLogger()), v1alpha1.ApplicationSet{
 				ObjectMeta: metav1.ObjectMeta{
 					Name:      "name",
 					Namespace: "namespace",
@@ -234,6 +252,7 @@ func TestMergeTemplateApplications(t *testing.T) {
 				generators,
 				renderer,
 				nil,
+				&matcherMock,
 			)
 
 			assert.Equal(t, cc.expectedApps, got)
@@ -328,7 +347,15 @@ func TestGenerateAppsUsingPullRequestGenerator(t *testing.T) {
 			}
 			renderer := &utils.Render{}
 
-			gotApp, _, _ := GenerateApplications(log.NewEntry(log.StandardLogger()), v1alpha1.ApplicationSet{
+			matcherMock := rendmock.Matcher{}
+			tempAppList := []v1alpha1.Application{}
+			matcherMock.On("FilterApps", mock.Anything, mock.Anything, mock.Anything, mock.Anything).
+				Run(func(args mock.Arguments) {
+					apps := args.Get(3).([]v1alpha1.Application)
+					tempAppList = apps
+				}).Return(tempAppList, nil)
+
+			gotApp, _, _ := GenerateApplications(context.TODO(), log.NewEntry(log.StandardLogger()), v1alpha1.ApplicationSet{
 				Spec: v1alpha1.ApplicationSetSpec{
 					GoTemplate: true,
 					Generators: []v1alpha1.ApplicationSetGenerator{{
@@ -340,6 +367,7 @@ func TestGenerateAppsUsingPullRequestGenerator(t *testing.T) {
 				generators,
 				renderer,
 				nil,
+				&matcherMock,
 			)
 			assert.Equal(t, cases.expectedApp[0].Name, gotApp[0].Name)
 			assert.Equal(t, cases.expectedApp[0].Spec.Source.TargetRevision, gotApp[0].Spec.Source.TargetRevision)

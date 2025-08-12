@@ -16,6 +16,7 @@ packages:
   github.com/argoproj/argo-cd/v3/applicationset/utils:
     interfaces:
       Renderer: {}
+      Matcher: {}
   github.com/argoproj/argo-cd/v3/commitserver/apiclient:
     interfaces:
       CommitServiceClient: {}
