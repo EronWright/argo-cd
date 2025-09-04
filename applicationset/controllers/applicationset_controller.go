@@ -52,6 +52,7 @@ import (
 	"github.com/argoproj/argo-cd/gitops-engine/pkg/health"
 
 	"github.com/argoproj/argo-cd/v3/applicationset/controllers/template"
+	"github.com/argoproj/argo-cd/v3/applicationset/filter"
 	"github.com/argoproj/argo-cd/v3/applicationset/generators"
 	"github.com/argoproj/argo-cd/v3/applicationset/metrics"
 	"github.com/argoproj/argo-cd/v3/applicationset/status"
@@ -118,7 +119,7 @@ type ApplicationSetReconciler struct {
 	MaxResourcesStatusCount      int
 	ClusterInformer              *settings.ClusterInformer
 	ConcurrentApplicationUpdates int
-	Matcher                      *utils.AppsMatcher
+	Matcher                      *filter.AppsMatcher
 }
 
 // +kubebuilder:rbac:groups=argoproj.io,resources=applicationsets,verbs=get;list;watch;create;update;patch;delete
