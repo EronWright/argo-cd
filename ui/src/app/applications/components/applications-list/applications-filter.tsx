@@ -1,3 +1,4 @@
+import {NotificationType} from 'argo-ui';
 import {useData, Checkbox} from 'argo-ui/v2';
 import * as React from 'react';
 import {
@@ -17,6 +18,7 @@ import {createMetadataSelector} from '../selectors';
 import {ComparisonStatusIcon, getAppSetHealthStatus, HealthStatusIcon} from '../utils';
 import {formatClusterQueryParam} from '../../../shared/utils';
 import {COLORS} from '../../../shared/components';
+import {Context} from '../../../shared/context';
 
 export interface FilterResult {
     sync: boolean;
@@ -48,11 +50,14 @@ export function getAppSetFilterResults(appSets: ApplicationSet[], pref: AppSetsL
         ...appSet,
         filterResult: {
             health: pref.healthFilter.length === 0 || pref.healthFilter.includes(getAppSetHealthStatus(appSet)),
-            favourite: !pref.showFavorites || (pref.favoritesAppList && pref.favoritesAppList.includes(appSet.metadata.name)),
+            favourite: !pref.showFavorites || (pref.favoritesAppUids && pref.favoritesAppUids.includes(appSet.metadata.uid)),
             labels: pref.labelsFilter.length === 0 || labelSelector(appSet.metadata.labels)
         }
     }));
 }
+
+const MAX_URL_LENGTH = 70000;
+const FAVORITES_QUERY_OVERHEAD = 2048;
 
 const optionsFrom = (options: string[], filter: string[]) => {
     return options
@@ -305,22 +310,44 @@ const TargetRevisionFilter = (props: AppFilterProps) => {
     );
 };
 
-const FavoriteFilter = (props: {value: boolean; onChange: (showFavorites: boolean) => void}) => {
+const FavoriteFilter = (props: AppFilterProps) => {
+    const ctx = React.useContext(Context);
     const onChange = (val: boolean) => {
-        props.onChange(val);
+        if (val) {
+            const favorites = Array.from(new Set(props.pref.favoritesAppUids || []));
+            if (favorites.length > 0) {
+                const params = new URLSearchParams();
+                favorites.forEach(uid => params.append('uids', uid));
+                const estimatedLength = '/applications?'.length + FAVORITES_QUERY_OVERHEAD + params.toString().length;
+                if (estimatedLength > MAX_URL_LENGTH) {
+                    ctx.notifications.show({
+                        content: 'Favorites filter cannot be applied because it exceeds the 70k character URL limit. Reduce the number of favorites and try again.',
+                        type: NotificationType.Error
+                    });
+                    return;
+                }
+            }
+        }
+        props.onChange({...props.pref, showFavorites: val});
     };
     return (
         <div
-            className={`filter filter__item ${props.value ? 'filter__item--selected' : ''}`}
+            className={`filter filter__item ${props.pref.showFavorites ? 'filter__item--selected' : ''}`}
             style={{margin: '0.5em 0', marginTop: '0.5em'}}
-            onClick={() => onChange(!props.value)}>
-            <Checkbox
-                value={!!props.value}
-                onChange={onChange}
-                style={{
-                    marginRight: '8px'
-                }}
-            />
+            onClick={() => onChange(!props.pref.showFavorites)}>
+            <span onClick={e => e.stopPropagation()}>
+                <Checkbox
+                    value={!!props.pref.showFavorites}
+                    onChange={val => {
+                        if (val !== props.pref.showFavorites) {
+                            onChange(val);
+                        }
+                    }}
+                    style={{
+                        marginRight: '8px'
+                    }}
+                />
+            </span>
             <div style={{marginRight: '5px', textAlign: 'center', width: '25px'}}>
                 <i style={{color: '#FFCE25'}} className='fas fa-star' />
             </div>
@@ -424,7 +451,7 @@ export const ApplicationsFilter = (props: AppFilterProps) => {
 
     return (
         <FiltersGroup title='Application filters' content={props.children} appliedFilter={appliedFilter} onClearFilter={onClearFilter} collapsed={props.collapsed}>
-            <FavoriteFilter value={!!props.pref.showFavorites} onChange={val => props.onChange({...props.pref, showFavorites: val})} />
+            <FavoriteFilter {...props} />
             <SyncFilter {...props} />
             <AppHealthFilter {...props} />
             <OperationFilter {...props} />

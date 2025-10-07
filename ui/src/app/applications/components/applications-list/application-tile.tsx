@@ -24,7 +24,7 @@ export interface ApplicationTileProps {
 
 export const ApplicationTile = ({app, selected, pref, ctx, tileRef, syncApplication, refreshApplication, deleteApplication}: ApplicationTileProps) => {
     const useAuthSettingsCtx = React.useContext(AuthSettingsCtx);
-    const favList = pref.appList.favoritesAppList || [];
+    const favList = pref.appList.favoritesAppUids || [];
 
     const source = getAppDefaultSource(app);
     const isOci = source?.repoURL?.startsWith('oci://');
@@ -41,7 +41,7 @@ export const ApplicationTile = ({app, selected, pref, ctx, tileRef, syncApplicat
         } else {
             favList.push(app.metadata.name);
         }
-        services.viewPreferences.updatePreferences({appList: {...pref.appList, favoritesAppList: favList}});
+        services.viewPreferences.updatePreferences({appList: {...pref.appList, favoritesAppUids: favList}});
     };
 
     const handleExternalLinkClick = (e: React.MouseEvent) => {
