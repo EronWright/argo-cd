@@ -24,14 +24,13 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apimachinery/pkg/types"
 
-	"github.com/argoproj/argo-cd/v3/util/gpg"
-
 	argoappv1 "github.com/argoproj/argo-cd/v3/pkg/apis/application/v1alpha1"
 	"github.com/argoproj/argo-cd/v3/pkg/client/clientset/versioned/typed/application/v1alpha1"
 	applicationsv1 "github.com/argoproj/argo-cd/v3/pkg/client/listers/application/v1alpha1"
 	"github.com/argoproj/argo-cd/v3/reposerver/apiclient"
 	"github.com/argoproj/argo-cd/v3/util/db"
 	"github.com/argoproj/argo-cd/v3/util/glob"
+	"github.com/argoproj/argo-cd/v3/util/gpg"
 	utilio "github.com/argoproj/argo-cd/v3/util/io"
 	"github.com/argoproj/argo-cd/v3/util/settings"
 )
@@ -41,6 +40,16 @@ const (
 )
 
 var ErrAnotherOperationInProgress = status.Errorf(codes.FailedPrecondition, "another operation is already in progress")
+
+// AkpRepoServerContext adds akp destination metadata headers to the context for
+// repo-server proxy routing. This allows the repo-server proxy to route
+// requests to the correct cluster's repo-server.
+func AkpRepoServerContext(ctx context.Context, app *argoappv1.Application) context.Context {
+	return metadata.AppendToOutgoingContext(ctx,
+		"akp-dest-server", app.Spec.Destination.Server,
+		"akp-dest-namespace", app.Spec.Destination.Namespace,
+		"akp-dest-name", app.Spec.Destination.Name)
+}
 
 // AugmentSyncMsg enrich the K8s message with user-relevant information
 func AugmentSyncMsg(res common.ResourceSyncResult, apiResourceInfoGetter func() ([]kube.APIResourceInfo, error)) (string, error) {
@@ -840,8 +849,7 @@ func verifyGenerateManifests(
 		}
 
 		// akp custom metadata for inferring cluster destination
-		ctx = metadata.AppendToOutgoingContext(ctx, "akp-dest-server", app.Spec.Destination.Server, "akp-dest-namespace", app.Spec.Destination.Namespace, "akp-dest-name", app.Spec.Destination.Name)
-
+		ctx = AkpRepoServerContext(ctx, app)
 		appLabelKey, err := settingsMgr.GetAppInstanceLabelKey()
 		if err != nil {
 			conditions = append(conditions, argoappv1.ApplicationCondition{

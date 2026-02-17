@@ -682,6 +682,7 @@ func (s *Server) GetManifests(ctx context.Context, q *application.ApplicationMan
 			return fmt.Errorf("failed to get ref sources: %w", err)
 		}
 
+		ctx = argo.AkpRepoServerContext(ctx, a)
 		for _, source := range sources {
 			repo, err := s.db.GetRepository(ctx, source.RepoURL, proj.Name)
 			if err != nil {
@@ -836,6 +837,7 @@ func (s *Server) GetManifestsWithFiles(stream application.ApplicationService_Get
 			return fmt.Errorf("error getting kustomize settings: %w", err)
 		}
 
+		ctx = argo.AkpRepoServerContext(ctx, a)
 		req := &apiclient.ManifestRequest{
 			Repo:                            repo,
 			Revision:                        source.TargetRevision,
@@ -856,7 +858,7 @@ func (s *Server) GetManifestsWithFiles(stream application.ApplicationService_Get
 			AnnotationManifestGeneratePaths: a.GetAnnotation(v1alpha1.AnnotationKeyManifestGeneratePaths),
 		}
 
-		repoStreamClient, err := client.GenerateManifestWithFiles(stream.Context())
+		repoStreamClient, err := client.GenerateManifestWithFiles(ctx)
 		if err != nil {
 			return fmt.Errorf("error opening stream: %w", err)
 		}
@@ -969,6 +971,7 @@ func (s *Server) Get(ctx context.Context, q *application.ApplicationQuery) (*v1a
 			if err != nil {
 				return fmt.Errorf("error getting trackingMethod from settings: %w", err)
 			}
+			ctx = argo.AkpRepoServerContext(ctx, a)
 			_, err = client.GetAppDetails(ctx, &apiclient.RepoServerAppDetailsQuery{
 				Repo:               repo,
 				Source:             &source,
@@ -1772,6 +1775,7 @@ func (s *Server) RevisionMetadata(ctx context.Context, q *application.RevisionMe
 		return nil, fmt.Errorf("error creating repo server client: %w", err)
 	}
 	defer utilio.Close(conn)
+	ctx = argo.AkpRepoServerContext(ctx, a)
 	return repoClient.GetRevisionMetadata(ctx, &apiclient.RepoServerRevisionMetadataRequest{
 		Repo:           repo,
 		Revision:       q.GetRevision(),
@@ -1803,6 +1807,7 @@ func (s *Server) RevisionChartDetails(ctx context.Context, q *application.Revisi
 		return nil, fmt.Errorf("error creating repo server client: %w", err)
 	}
 	defer utilio.Close(conn)
+	ctx = argo.AkpRepoServerContext(ctx, a)
 	return repoClient.GetRevisionChartDetails(ctx, &apiclient.RepoServerRevisionChartDetailsRequest{
 		Repo:     repo,
 		Name:     source.Chart,
@@ -1831,6 +1836,7 @@ func (s *Server) GetOCIMetadata(ctx context.Context, q *application.RevisionMeta
 	}
 	defer utilio.Close(conn)
 
+	ctx = argo.AkpRepoServerContext(ctx, a)
 	return repoClient.GetOCIMetadata(ctx, &apiclient.RepoServerRevisionChartDetailsRequest{
 		Repo:     repo,
 		Name:     source.Chart,
@@ -2573,6 +2579,7 @@ func (s *Server) resolveRevision(ctx context.Context, app *v1alpha1.Application,
 		}
 	}
 
+	ctx = argo.AkpRepoServerContext(ctx, app)
 	resolveRevisionResponse, err := repoClient.ResolveRevision(ctx, &apiclient.ResolveRevisionRequest{
 		Repo:              repo,
 		App:               app,
