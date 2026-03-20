@@ -1042,6 +1042,11 @@ func (m *nativeGitClient) CheckoutOrNew(branch, base string, submoduleEnabled bo
 		if err != nil {
 			return out, fmt.Errorf("failed to create branch: %w", err)
 		}
+		// Push the commit.
+		err = m.runCredentialedCmd(context.Background(), "push", "origin", branch)
+		if err != nil {
+			return "", fmt.Errorf("failed to push to branch: %w", err)
+		}
 	}
 	return "", nil
 }
