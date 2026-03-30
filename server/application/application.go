@@ -3203,13 +3203,50 @@ func (s *Server) ServerSideDiff(ctx context.Context, q *application.ApplicationS
 		// Create ResourceDiff with StateDiffs results
 		// TargetState = PredictedLive (what the target should be after applying)
 		// LiveState = NormalizedLive (current normalized live state)
+		targetState := string(diffRes.PredictedLive)
+		liveState := string(diffRes.NormalizedLive)
+
+		if kind == kube.SecretKind && group == "" {
+			var targetObj, liveObj *unstructured.Unstructured
+			if len(diffRes.PredictedLive) > 0 {
+				targetObj = &unstructured.Unstructured{}
+				if err := json.Unmarshal(diffRes.PredictedLive, targetObj); err != nil {
+					return nil, fmt.Errorf("error unmarshaling predicted live for secret masking: %w", err)
+				}
+			}
+			if len(diffRes.NormalizedLive) > 0 {
+				liveObj = &unstructured.Unstructured{}
+				if err := json.Unmarshal(diffRes.NormalizedLive, liveObj); err != nil {
+					return nil, fmt.Errorf("error unmarshaling normalized live for secret masking: %w", err)
+				}
+			}
+			maskedTarget, maskedLive, err := diff.HideSecretData(targetObj, liveObj, s.settingsMgr.GetSensitiveAnnotations())
+			if err != nil {
+				return nil, fmt.Errorf("error masking secret data: %w", err)
+			}
+			if maskedTarget != nil {
+				data, err := json.Marshal(maskedTarget)
+				if err != nil {
+					return nil, fmt.Errorf("error marshaling masked target state: %w", err)
+				}
+				targetState = string(data)
+			}
+			if maskedLive != nil {
+				data, err := json.Marshal(maskedLive)
+				if err != nil {
+					return nil, fmt.Errorf("error marshaling masked live state: %w", err)
+				}
+				liveState = string(data)
+			}
+		}
+
 		responseDiffs = append(responseDiffs, &v1alpha1.ResourceDiff{
 			Group:           group,
 			Kind:            kind,
 			Namespace:       namespace,
 			Name:            name,
-			TargetState:     string(diffRes.PredictedLive),
-			LiveState:       string(diffRes.NormalizedLive),
+			TargetState:     targetState,
+			LiveState:       liveState,
 			Diff:            "", // Diff string is generated client-side
 			Hook:            hook,
 			Modified:        diffRes.Modified,
