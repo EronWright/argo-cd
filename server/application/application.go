@@ -1369,9 +1369,15 @@ func (s *Server) Watch(q *application.ApplicationQuery, ws application.Applicati
 	if q.Name != nil {
 		logCtx = logCtx.WithField("application", *q.Name)
 	}
-	filter, err := s.getAppFilter(ws.Context(), q)
+	queryFilter, err := s.getAppFilter(ws.Context(), q)
 	if err != nil {
 		return fmt.Errorf("error getting application filter: %w", err)
+	}
+	filter := func(app *v1alpha1.Application) bool {
+		if !s.enf.Enforce(ws.Context().Value("claims"), rbac.ResourceApplications, rbac.ActionGet, app.RBACName(s.ns)) {
+			return false
+		}
+		return queryFilter(app)
 	}
 
 	sendEvent := func(a v1alpha1.Application, eventType watch.EventType) {
@@ -3299,11 +3305,6 @@ func (s *Server) getAppFilter(ctx context.Context, q *application.ApplicationQue
 		if app.Namespace != s.ns && !glob.MatchStringInList(s.enabledNamespaces, app.Namespace, glob.REGEXP) {
 			return false
 		}
-		if !s.enf.Enforce(ctx.Value("claims"), rbac.ResourceApplications, rbac.ActionGet, app.RBACName(s.ns)) {
-			// do not emit apps user does not have accessing
-			return false
-		}
-
 		if appVersion, err := strconv.Atoi(app.ResourceVersion); err == nil && appVersion < minVersion {
 			return false
 		}
